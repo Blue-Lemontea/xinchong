@@ -19,7 +19,7 @@ Closes #
 - [ ] 只做了一件事（没有顺手改别的）
 - [ ] 本地能跑通，没有报错
 - [ ] 已更新 `docs/STATUS.md`
-- [ ] 已更新当天 `docs/log/YYYY-MM-DD.md`
+- [ ] 已新增 `docs/log/YYYY-MM-DD-<任务号>.md`
 - [ ] 没有提交 `node_modules/`、安装包、`.env*`
 - [ ] 涉及产品行为的改动，能对应到调研依据或 `DECISIONS.md`
 

@@ -36,7 +36,8 @@
 ## 5. 干活规矩
 
 - **一个任务 = 一个分支 = 一个 PR**，分支名 `feat/<任务号>-<短描述>`，如 `feat/p1-3-personality`
-- 改代码的 PR **必须同时更新** `docs/STATUS.md` 和当天的 `docs/log/`
+- 改代码的 PR **必须同时更新** `docs/STATUS.md` 和一篇 `docs/log/YYYY-MM-DD-<任务号>.md`
+- **日志按任务建文件，不按天合并** —— 两个人同一天做不同任务时不会改同一个文件，也就不会冲突
 - 提交信息用中文，一句话说清做了什么
 - 不提交 `node_modules/`、`.next/`、安装包、`.env*`
 - 不确定的事写进 `docs/DECISIONS.md` 提问，不要在代码里自行发明

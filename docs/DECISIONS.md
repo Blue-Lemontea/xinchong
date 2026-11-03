@@ -56,9 +56,9 @@
 **决定**：
 
 - `docs/STATUS.md` 是**唯一**进度快照，每次会话结束更新
-- `docs/log/YYYY-MM-DD.md` 是**追加式**历史，不修改旧条目
+- `docs/log/YYYY-MM-DD-<任务号>.md` 是**只增不改**的历史，一人一任务一个文件
 - `docs/BACKLOG.md` 是任务真源，GitHub Issue 只是它的镜像
-- 改代码的 PR 必须同时更新 STATUS 和当天 log
+- 改代码的 PR 必须同时更新 STATUS 和新增一篇日志
 
 **理由**：AI 和新成员只需读一页就能接手；历史放在日志里不会污染快照。
 
