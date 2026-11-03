@@ -9,6 +9,16 @@
 > 📦 **本仓库 = 芯宠产品主体**：桌面客户端工程 + 产品/研究文档。
 > 🌐 **门户网站**（介绍 + 下载页）在独立仓库：[kleigsm/xinchong-site](https://github.com/kleigsm/xinchong-site)
 
+## 从哪里开始
+
+| 你是 | 先读 |
+|---|---|
+| **接手的 AI / 新成员** | [`AGENTS.md`](AGENTS.md) → [`docs/STATUS.md`](docs/STATUS.md) |
+| **要认领任务** | [`docs/BACKLOG.md`](docs/BACKLOG.md) → [`CONTRIBUTING.md`](CONTRIBUTING.md) |
+| **想知道进度** | [`docs/STATUS.md`](docs/STATUS.md) → [`docs/log/`](docs/log/) |
+| **想知道为什么这么定** | [`docs/DECISIONS.md`](docs/DECISIONS.md) |
+| **想看计划** | [`docs/ROADMAP.md`](docs/ROADMAP.md) |
+
 ---
 
 ## 目录
@@ -238,14 +248,18 @@
 | 图片处理 | 上传图本地换肤，**不上传云端**（N1） |
 | 资源占用 | 内存/CPU 首屏可见，卡顿自动降帧 |
 
-### 目录规划（待建）
+### 目录规划
+
+**仓库根目录即客户端工程根目录**（不建 `client/` 子目录，理由见 [`docs/DECISIONS.md` D-002](docs/DECISIONS.md)）。
 
 ```
 xinchong/
-├── client/          # Windows 桌面客户端（选型后创建）
-├── docs/            # 产品文档、研究报告
-├── README.md
-└── .gitignore
+├── src/             # 客户端源码（P0-2 后创建）
+├── docs/            # 进度、规划、决策、日志
+├── .github/         # PR / Issue 模板
+├── AGENTS.md        # AI / 新成员接管入口
+├── CONTRIBUTING.md  # fork / PR 协作流程
+└── README.md
 ```
 
 ---
@@ -282,31 +296,20 @@ https://github.com/kleigsm/xinchong/releases/latest
 
 ## 路线图
 
-**研究（已完成）**
+进度与计划不在这里维护，避免两处不同步：
 
-- [x] 产品定位与竞品分析（实验二）
-- [x] 用户研究：问卷 N=52 + 访谈 2 人（实验二）
-- [x] 需求优先级与用例规约（实验二）
+- **当前做到哪了** → [`docs/STATUS.md`](docs/STATUS.md)
+- **完整周计划与里程碑** → [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- **任务清单与依赖** → [`docs/BACKLOG.md`](docs/BACKLOG.md)
 
-**客户端（本仓库）**
+一句话版本：
 
-- [ ] 技术选型验证（Electron vs Tauri，实测内存）
-- [ ] 透明置顶窗 + 点击穿透 + 拖拽 最小原型
-- [ ] Windows 单平台 MVP：F1–F4
-- [ ] 上传图片生成外观（F5）
-- [ ] 性能调优与用户测试
-
-**门户网站（[xinchong-site](https://github.com/kleigsm/xinchong-site)）**
-
-- [x] 骨架搭建
-- [x] 绑定 Vercel / Render 自动部署
-- [ ] 产品介绍页 + 下载页
-- [ ] 打通 Releases 下载链路
-
-**微信小程序（Phase 2，暂不启动）**
-
-- [ ] 确认个人主体能否拿到 AI 形象生成类目
-- [ ] 形象生成 + 一键到桌面端（仅 A 类）
+| 阶段 | 目标 | 状态 |
+|---|---|---|
+| P0 地基 | 定框架、开透明窗 | 🔄 进行中 |
+| P1 MVP | F1–F4 可用 | ⬜ |
+| P2 差异化 | 上传图片换肤 | ⬜ |
+| P3 交付 | 打包、测试、答辩 | ⬜ |
 
 ---
 
