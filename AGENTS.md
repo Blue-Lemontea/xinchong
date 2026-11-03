@@ -11,7 +11,7 @@
 | 3 | [`docs/log/`](docs/log/) 最近 3 篇 | 上次做了什么、踩了什么坑 |
 | 4 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | 已定的决策，不要重新推翻 |
 
-需要背景时再读 [`docs/ROADMAP.md`](docs/ROADMAP.md) 和根目录 [`README.md`](README.md)（产品定位与调研结论）。
+需要背景时再读 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)（技术选型与实现方案）、[`docs/ROADMAP.md`](docs/ROADMAP.md)（周计划）和根目录 [`README.md`](README.md)（产品定位与调研结论）。
 
 ## 2. 项目是什么
 
