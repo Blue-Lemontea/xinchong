@@ -43,16 +43,37 @@ machine.start();
 
 let pressOrigin: Point | null = null;
 let dragging = false;
+let patTimer: number | null = null;
+let patTriggered = false;
+let lastClickAt = 0;
+let rapidCount = 0;
+
+function clearPatTimer(): void {
+  if (patTimer !== null) {
+    window.clearTimeout(patTimer);
+    patTimer = null;
+  }
+}
 
 window.addEventListener("mousedown", (event: MouseEvent) => {
   // 只响应左键，右键留给菜单
   if (event.button !== 0) return;
   pressOrigin = { x: event.screenX, y: event.screenY };
   dragging = false;
+  patTriggered = false;
+  clearPatTimer();
+  // 长按 0.65 秒 = 摸头
+  patTimer = window.setTimeout(() => {
+    if (pressOrigin && !dragging && !patTriggered) {
+      patTriggered = true;
+      machine.playPat();
+    }
+  }, 650);
 });
 
 window.addEventListener("mousemove", (event: MouseEvent) => {
   if (!pressOrigin) return;
+  if (patTriggered) return;
 
   // 松手事件可能丢失（光标已经移出窗口，例如拖到屏幕边缘时），
   // 用 buttons 状态兜底：拖动中却没有按键按下，说明早就松手了。
@@ -65,6 +86,7 @@ window.addEventListener("mousemove", (event: MouseEvent) => {
     const dx = event.screenX - pressOrigin.x;
     const dy = event.screenY - pressOrigin.y;
     if (Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+      clearPatTimer();
       dragging = true;
       petEl.classList.add("dragging");
       machine.onDragStart();
@@ -82,6 +104,7 @@ window.addEventListener("mousemove", (event: MouseEvent) => {
 });
 
 function endDrag(): void {
+  clearPatTimer();
   window.pet.dragEnd();
   petEl.classList.remove("dragging");
   machine.onDragEnd();
@@ -91,11 +114,32 @@ function endDrag(): void {
 
 window.addEventListener("mouseup", () => {
   if (!pressOrigin) return;
+  clearPatTimer();
+
+  // 长按已经触发摸头，松手不要再补一次点击
+  if (patTriggered) {
+    patTriggered = false;
+    pressOrigin = null;
+    dragging = false;
+    return;
+  }
 
   if (dragging) {
     endDrag();
   } else {
-    machine.onPetClick();
+    const now = performance.now();
+    rapidCount = now - lastClickAt < 1200 ? rapidCount + 1 : 1;
+    lastClickAt = now;
+
+    if (rapidCount >= 3) {
+      rapidCount = 0;
+      machine.playAngry();
+    } else if (rapidCount === 2) {
+      machine.playWave();
+    } else {
+      machine.onPetClick();
+    }
+
     pressOrigin = null;
     dragging = false;
   }
@@ -145,6 +189,14 @@ function applySettings(settings: Settings): void {
 }
 
 window.pet.onSettings(applySettings);
+
+// 托盘 / 右键菜单里的「动作」主动触发
+window.pet.onPlayAction((name) => {
+  if (name === "wave") machine.playWave();
+  else if (name === "stretch") machine.playStretch();
+  else if (name === "pat") machine.playPat();
+  else if (name === "angry") machine.playAngry();
+});
 
 // 用户导入角色成功后，立即换上（不重启程序）
 window.pet.onUsePet((payload) => {
